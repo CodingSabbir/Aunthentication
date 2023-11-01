@@ -1,12 +1,19 @@
-import React from 'react';
+
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { NavLink } from 'react-router-dom';
 import auth from '../firebase.Config';
+import { signOut } from 'firebase/auth';
+
+
 
 
 const Header = () => {
+ const [user]=useAuthState(auth)
+console.log(user)
 
-const {user} = useAuthState(auth)
+const handleSignOut=()=>{
+  signOut(auth)
+}
 
 const styleColor=({isActive})=>{
    return{
@@ -77,12 +84,13 @@ const styleColor=({isActive})=>{
         <a href="#" class="block py-2 pl-3 pr-4  bg-blue-700 rounded md:bg-transparent md:p-0 " aria-current="page">Reg </a>
         </NavLink>
         </li>
-      {
-        user 
-        ?   <button className='bg-blue-500 text-white px-1 rounded-sm'>Sign in</button> 
-        :   <button  className='bg-blue-500 text-white px-1 rounded-sm'>Sign out</button>
-      }
-        
+     
+        {user ? (
+          <button onClick={handleSignOut} className='bg-blue-500 text-white px-1 rounded-sm'>Sign out</button>   
+          ) : (
+            <button className='bg-blue-500 text-white px-1 rounded-sm'>Sign in</button>
+          )}
+       
         
       </ul>
     </div>
@@ -97,3 +105,7 @@ const styleColor=({isActive})=>{
 };
 
 export default Header;
+
+
+
+

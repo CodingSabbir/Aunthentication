@@ -8,7 +8,15 @@
 
 //     const [ createUserWithEmailAndPassword ] = useCreateUserWithEmailAndPassword(auth);
        
-        
+//     const handleCreateAccount = async () => {
+  
+//       const userCredential = await createUserWithEmailAndPassword(email, password);
+//       const user = userCredential.user;
+//       console.log('User created:', user);
+//       // You can navigate to a new page or perform other actions here on successful registration.
+   
+    
+//   };
      
 
 //     return (
@@ -34,7 +42,7 @@
 //             </div>
 //             <a href="#" class="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>
 //         </div>
-//         <button onClick={() => createUserWithEmailAndPassword(email, password)} type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create account</button>
+//         <button onClick={handleCreateAccount} type="submit" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create account</button>
         
 //     </form>
 // </div>
@@ -55,19 +63,20 @@ import auth from '../../firebase.Config';
 const Registration = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState(null);
+  const messageDiv=document.querySelector('.messageDiv')
 
-  const [createUserWithEmailAndPassword] = useCreateUserWithEmailAndPassword(auth);
+  const [createUserWithEmailAndPassword ,   user,   loading,    error,] = useCreateUserWithEmailAndPassword(auth);
+  if (error) {
+    messageDiv.innerHTML=error
+  }
+  if (loading) {
+    messageDiv.innerHTML='Loading...';
+  }
+  if (user) {
+    messageDiv.innerHTML='User already  logged in with username'
+  }
+ 
 
-  const handleCreateAccount = async () => {
-  
-      const userCredential = await createUserWithEmailAndPassword(email, password);
-      const user = userCredential.user;
-      console.log('User created:', user);
-      // You can navigate to a new page or perform other actions here on successful registration.
-   
-    
-  };
 
   return (
     <>
@@ -115,8 +124,9 @@ const Registration = () => {
             </div>
             <a href="#" className="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>
           </div>
+          <div className='messageDiv'></div>
           <button
-            onClick={handleCreateAccount}
+            onClick={()=> createUserWithEmailAndPassword(email, password)}
             type="button"
             className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           >

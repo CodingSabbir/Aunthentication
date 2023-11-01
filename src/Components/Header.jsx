@@ -1,8 +1,13 @@
 import React from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { NavLink } from 'react-router-dom';
+import auth from '../firebase.Config';
 
 
 const Header = () => {
+
+const {user} = useAuthState(auth)
+
 const styleColor=({isActive})=>{
    return{
      textDecoration : isActive ? 'none' : 'underline',
@@ -69,13 +74,23 @@ const styleColor=({isActive})=>{
         </li>
         <li>
         <NavLink style={styleColor} to={'/regester'}>
-        <a href="#" class="block py-2 pl-3 pr-4  bg-blue-700 rounded md:bg-transparent md:p-0 " aria-current="page">Sign in </a>
+        <a href="#" class="block py-2 pl-3 pr-4  bg-blue-700 rounded md:bg-transparent md:p-0 " aria-current="page">Reg </a>
         </NavLink>
         </li>
+      {
+        user 
+        ?   <button className='bg-blue-500 text-white px-1 rounded-sm'>Sign in</button> 
+        :   <button  className='bg-blue-500 text-white px-1 rounded-sm'>Sign out</button>
+      }
+        
+        
       </ul>
     </div>
   </div>
 </nav>
+
+
+
 
         </>
     );

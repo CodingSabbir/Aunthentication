@@ -61,6 +61,7 @@
 import React, { useState } from 'react';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.Config';
+import { NavLink } from 'react-router-dom';
 
 const Registration = () => {
   const [email, setEmail] = useState('');
@@ -84,7 +85,7 @@ const Registration = () => {
     <>
       <div className="container mx-auto mt-10 w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
         <form className="space-y-6" action="#">
-          <h5 className="text-xl font-medium text-gray-900 dark:text-white">Sign in to our platform</h5>
+          <h5 className="text-xl font-medium text-gray-900 dark:text-white">Reg in to our platform</h5>
           <div>
             <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
             <input
@@ -127,6 +128,9 @@ const Registration = () => {
             <a href="#" className="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>
           </div>
           <div className='messageDiv'></div>
+          <NavLink  to={'/signin'}>
+        <a href="#" class="block py-2 pl-3 pr-4  text-blue-700 rounded md:bg-transparent md:p-0 " aria-current="page"> Sign in </a>
+        </NavLink>
           <button
             onClick={()=> createUserWithEmailAndPassword(email, password)}
             type="button"

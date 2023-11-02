@@ -5,6 +5,8 @@ import NotMatch from "./Components/NotMatch/NotMatch"
 import About from "./Components/About/About"
 import Service from "./Components/Service/Service"
 import Regestion from "./Components/Register/Regestion"
+import SignIn from "./Components/Signin/SignIn"
+import RequireAuth from "./Components/RequireAuth/RequireAuth"
 
 
 function App() {
@@ -17,8 +19,9 @@ function App() {
           <Route path="/" element={<Home/>}/>
           <Route path="/home" element={<Home/>}/>
           <Route path="/about" element={<About/>}/>
-          <Route path="/service" element={<Service/>}/>
+          <Route path="/service" element={<RequireAuth><Service/></RequireAuth>}/>
           <Route path="/regester" element={<Regestion/>}/>
+          <Route path="/signin" element={<SignIn/>}/>
           <Route path="*" element={<NotMatch/>}/>
         </Routes>
     </>

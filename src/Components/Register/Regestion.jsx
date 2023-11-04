@@ -63,13 +63,15 @@ import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.Config';
 import { NavLink } from 'react-router-dom';
 import GoogleSignUp from '../GoogleSignUp/GoogleSignUp';
+import Facebook from '../Facebook/Facebook';
+
 
 const Registration = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const messageDiv=document.querySelector('.messageDiv')
 
-  const [createUserWithEmailAndPassword ,   user,   loading,    error,] = useCreateUserWithEmailAndPassword(auth);
+  const [createUserWithEmailAndPassword ,   user,   loading,    error,] = useCreateUserWithEmailAndPassword(auth,{sendEmailVerification:true} );
   if (error) {
     messageDiv.innerHTML=error
   }
@@ -135,6 +137,7 @@ const Registration = () => {
            </div>
           
           <GoogleSignUp/>
+          <Facebook/>
         </form>
       </div>
     </>

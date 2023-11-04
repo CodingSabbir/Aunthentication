@@ -62,6 +62,7 @@ import React, { useState } from 'react';
 import { useCreateUserWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.Config';
 import { NavLink } from 'react-router-dom';
+import GoogleSignUp from '../GoogleSignUp/GoogleSignUp';
 
 const Registration = () => {
   const [email, setEmail] = useState('');
@@ -83,7 +84,7 @@ const Registration = () => {
 
   return (
     <>
-      <div className="container mx-auto mt-10 w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
+      <div className="container mx-auto mt-5 w-full max-w-sm p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700">
         <form className="space-y-6" action="#">
           <h5 className="text-xl font-medium text-gray-900 dark:text-white">Reg in to our platform</h5>
           <div>
@@ -112,21 +113,7 @@ const Registration = () => {
               required
             />
           </div>
-          <div className="flex items-start">
-            <div className="flex items-start">
-              <div className="flex items-center h-5">
-                <input
-                  id="remember"
-                  type="checkbox"
-                  value=""
-                  className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800"
-                  required
-                />
-              </div>
-              <label htmlFor="remember" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Remember me</label>
-            </div>
-            <a href="#" className="ml-auto text-sm text-blue-700 hover:underline dark:text-blue-500">Lost Password?</a>
-          </div>
+          
           <div className='messageDiv'></div>
           <NavLink  to={'/signin'}>
         <a href="#" class="block py-2 pl-3 pr-4  text-blue-700 rounded md:bg-transparent md:p-0 " aria-current="page"> Sign in </a>
@@ -139,8 +126,15 @@ const Registration = () => {
             Create account
           </button>
          
-       
          
+            
+           <div className='flex justify-center gap-3'>
+            <div className='w-[50%] h-[2px] bg-slate-500 mt-3'></div>
+            <p className='font-mono font-semibold'>Or</p>
+            <div className='w-[50%] h-[2px] bg-slate-500 mt-3'></div>
+           </div>
+          
+          <GoogleSignUp/>
         </form>
       </div>
     </>
